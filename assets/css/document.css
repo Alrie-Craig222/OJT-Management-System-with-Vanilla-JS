@@ -81,9 +81,9 @@ body {
 
 .crudButtons {
     display: flex;
-    gap: 6px; /* Reduced space between buttons */
-    justify-content: flex-end; /* Align buttons to the right */
-    margin-left: 15px; /* Small margin between file name and buttons */
+    gap: 0; 
+    justify-content: flex-end; 
+    margin-left: 50%; 
     width: auto;
 }
 

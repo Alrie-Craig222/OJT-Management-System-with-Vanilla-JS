@@ -38,16 +38,13 @@
                     <li><a href="index.html"><i class="fa fa-home text-success"></i><span>
                                 Dashboard</span></a>
                     </li>
-                    <li><a href="student.html"><i class="fa fa-users text-success"></i><span>
-                                Master List</span></a>
+                    <li class="active"><a href="task.html"><i class="fa fa-tasks text-warning"></i><span>
+                                My Tasks</span></a>
                     </li>
-                    <li class="active"><a href="task.html"><i class="fa fa-tasks text-warning"></i><span> Tasks</span></a>
-                    </li>
-                    <li><a href="task_done.html"><i class="fa fa-file text-success"></i><span> Task Submitted</span></a>
+                    <li><a href="task_done.html"><i class="fa fa-file text-success"></i><span>
+                                Task Record</span></a>
                     </li>
                     <li><a href="message.html"><i class="fa fa-envelope text-success"></i><span> Message</span></a>
-                    </li>
-                    <li><a href="reports.html"><i class="fa fa-chart-bar text-success"></i><span> Reports</span></a>
                     </li>
                 </ul>
             </nav>
@@ -91,8 +88,6 @@
                                             <li class="nav-item"><a class="nav-link active" data-toggle="tab"
                                                     href="#list"><i class="fa fa-list-ul"> </i> Tasks List</a>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addnew"><i
-                                                        class="fa fa-plus"></i> Add New</a></li>
                                         </ul>
                                     </div>
                                     <div class="row">
@@ -143,10 +138,7 @@
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a class="dropdown-item" href="#" data-toggle="modal"
                                                                     data-target="#edit_task"><i
-                                                                        class="fa fa-pen m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                    data-target="#delete_task"><i
-                                                                        class="fa fa-trash m-r-5"></i> Delete</a>
+                                                                        class="fa fa-pen m-r-5"></i> Comply</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -205,19 +197,6 @@
                 </div>
             </div>
         </div>
-        <div id="delete_task" class="modal fade delete-modal animated rubberBand" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body text-center">
-                        <img src="../assets/images/sent.png" alt="" width="50" height="46">
-                        <h3>Are you sure want to delete this tasks?</h3>
-                        <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="edit_task" class="modal fade delete-modal animated rubberBand" role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -225,36 +204,18 @@
                                 <div class="col-sm-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title"><i></i>Update Tasks</h3>
+                                            <h3 class="card-title"><i></i>Comply Tasks</h3>
                                         </div>
                                         <form class="card-body">
                                             <div class="row clearfix">
                                                 <div class="col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label>Task Code</label>
-                                                        <input type="number" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Task Name</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Description</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Deadline</label>
-                                                        <input type="date" class="form-control">
+                                                        <label>Upload File</label>
+                                                        <input type="file" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                    <button type="submit" class="btn btn-primary">Upload</button>
                                                     <button type="submit"
                                                         class="btn btn-outline-secondary">Cancel</button>
                                                 </div>
@@ -276,4 +237,7 @@
     <script src="../assets/js/form/dropify.js"></script>
 </body>
 
+<!-- soccer/project/project-clients.html  07 Jan 2020 03:41:29 GMT -->
+
 </html>
+
