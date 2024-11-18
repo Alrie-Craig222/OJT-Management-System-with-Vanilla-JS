@@ -1,0 +1,30 @@
+`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student's Attendance Log</title>
+    <link rel="stylesheet" href="../assets/css/attendance_log.css">
+    
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="header">Student Attendance</div>
+
+        
+        <button id="checkInBtn" class="btn btn-check-in" onclick="checkIn()">Check In</button>
+
+       
+        <button id="checkOutBtn" class="btn btn-check-out" onclick="checkOut()" disabled>Check Out</button>
+
+       
+        <div class="attendance-log" id="attendanceLog">
+            <p><strong>Attendance Log</strong></p>
+        </div>
+    </div>
+
+    <script src="../assets/js/attendance_log.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Letter Builder</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <h2>Application Letter Builder</h2>
+    <form id="letter-form">
+        <label>Your Name:</label>
+        <input type="text" id="applicant-name" required>
+        <label>Position Applied For:</label>
+        <input type="text" id="position" required>
+        <label>Company Name:</label>
+        <input type="text" id="company" required>
+        <label>Application Date:</label>
+        <input type="date" id="date" required>
+        <label>Introduction:</label>
+        <textarea id="introduction" required></textarea>
+        <label>Body (Your Skills & Experiences):</label>
+        <textarea id="body" required></textarea>
+        <label>Closing Statement:</label>
+        <textarea id="closing" required></textarea>
+        <button type="button" onclick="generateLetter()">Generate Letter</button>
+    </form>
+    <div id="letter-output"></div>
+    <button id="download-letter" onclick="downloadLetter()">Download Letter</button>
+    <script src="../assets/js/applicationletter.js"></script>
+</body>
+</html>

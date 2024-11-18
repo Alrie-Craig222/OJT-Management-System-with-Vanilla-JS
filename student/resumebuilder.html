@@ -1,0 +1,123 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="../assets/css/resumebuilder.css">
+</head>
+<body>
+    <h2>Resume Builder</h2>
+    <form id="resume-form">
+        <label>Full Name:</label>
+        <input type="text" id="name" required>
+        <label>Email:</label>
+        <input type="email" id="email" required>
+        <label>Phone:</label>
+        <input type="tel" id="phone" required>
+        <label>Address:</label>
+        <textarea id="address" required></textarea>
+        <label>Education:</label>
+        <textarea id="education" required></textarea>
+        <label>Experience:</label>
+        <textarea id="experience" required></textarea>
+        <label>Skills:</label>
+        <textarea id="skills" required></textarea>
+        <button type="button" onclick="generateResume()">Generate Resume</button>
+    </form>
+    <div id="resume-output"></div>
+    <button id="download-resume" onclick="downloadResume()">Download Resume</button>
+    <script src="../assets/js/resumebuilder.js"></script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="../assets/css/resumebuilder.css">
+</head>
+<body>
+    <h2>Resume Builder</h2>
+    <form id="resume-form">
+        <label>Full Name:</label>
+        <input type="text" id="name" required>
+        <label>Job Title:</label>
+        <input type="text" id="jobTitle" required>
+        <label>Email:</label>
+        <input type="email" id="email" required>
+        <label>Phone:</label>
+        <input type="tel" id="phone" required>
+        <label>Address:</label>
+        <textarea id="address" required></textarea>
+        <label>About Me:</label>
+        <textarea id="about" required></textarea>
+        <label>Education:</label>
+        <textarea id="education" required></textarea>
+        <label>Experience:</label>
+        <textarea id="experience" required></textarea>
+        <label>Skills:</label>
+        <textarea id="skills" required></textarea>
+        <button type="button" onclick="generateResume()">Generate Resume</button>
+    </form>
+    <div id="resume-output"></div>
+    <button id="download-resume" onclick="downloadResume()" style="display:none;">Download Resume</button>
+    <script src="../assets/js/resumebuilder.js"></script>
+</body>
+</html>
+ -->
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="../assets/css/resumebuilder.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Resume Builder</h2>
+        <!-- Form for Resume Input -->
+        <form id="resume-form">
+            <label>Full Name:</label>
+            <input type="text" id="name" required>
+
+            <label>Job Title:</label>
+            <input type="text" id="jobTitle" required>
+
+            <label>Profile Photo:</label>
+            <input type="file" id="profilePhoto" accept="image/*">
+
+            <label>Contact Information:</label>
+            <input type="text" id="phone" placeholder="Phone Number" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <textarea id="address" placeholder="Address" required></textarea>
+
+            <label>About Me:</label>
+            <textarea id="about" placeholder="Brief Description"></textarea>
+
+            <label>Education:</label>
+            <textarea id="education" placeholder="Education Details (e.g., School, Degree, Year)"></textarea>
+
+            <label>Experience:</label>
+            <textarea id="experience" placeholder="Experience Details (e.g., Company, Position, Year, Description)"></textarea>
+
+            <label>Skills:</label>
+            <textarea id="skills" placeholder="List Skills Separated by Commas"></textarea>
+
+            <button type="button" onclick="generateResume()">Generate Resume</button>
+        </form>
+
+        <!-- Resume Output -->
+        <div id="resume-output" style="display:none;">
+            <button onclick="downloadResume()">Download Resume</button>
+            <div class="resume-content" id="resume-content"></div>
+        </div>
+    </div>
+    <script src="../assets/js/resumebuilder.js"></script>
+</body>
+</html>

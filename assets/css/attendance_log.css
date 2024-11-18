@@ -1,0 +1,96 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Global Styles */
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            background-color: #FF4500;
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+        }
+
+        /* Button Styles */
+        .btn {
+            width: 80%;
+            padding: 10px;
+            margin: 15px 0;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn-check-in {
+            background-color: #FF4500;
+            color: white;
+        }
+
+        .btn-check-out {
+            background-color: black;
+            color: white;
+        }
+
+        /* Attendance Log */
+        .attendance-log {
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .log-item {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: left;
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Daily Notes */
+        .notes-section {
+            padding: 15px;
+        }
+
+        .notes-title {
+            color: #FF4500;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .notes-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+   
