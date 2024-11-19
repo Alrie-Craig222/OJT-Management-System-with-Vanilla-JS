@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Scheduler</title>
+  <link rel="stylesheet" href="../assets/css/tasks.css">
+</head>
+<body>
+  <div id="container">
+    <h1 id="logo"><i class="fas fa-clipboard-list"></i> To-Do List Scheduler</h1>
+    <div id="formGroup">
+      <form id="formSubmit">
+        <label for="taskInput">Task Title</label>
+        <input type="text" id="taskInput" placeholder="Enter Task Title" />
+
+        <label for="dateInput">Date</label>
+        <input type="date" id="dateInput" />
+
+        <button type="submit" id="addTaskBtn">Add Task</button>
+      </form>
+    </div>
+
+    <div id="filterContainer">
+      <select id="filter">
+        <option value="all">All Tasks</option>
+        <option value="done">Done Tasks</option>
+        <option value="todo">To-Do Tasks</option>
+      </select>
+    </div>
+
+    <div id="tasksContainer">
+      <ul id="taskList"></ul>
+    </div>
+  </div>
+  <script src="../assets/js/tasks.js"></script>
+</body>
+</html>
