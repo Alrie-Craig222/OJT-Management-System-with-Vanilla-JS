@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Agency - View Assigned Trainees</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #ff4500;
+    }
+
+    .trainee-list {
+      margin-top: 3em;
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    .trainee-list th, .trainee-list td {
+      padding: 12px;
+      border: 1px solid #ff4500;
+    }
+
+    .trainee-list th {
+      background-color: #ff4500;
+      color: white;
+    }
+
+    .trainee-list td {
+      background-color: #f2f2f2;
+    }
+
+    .view-profile-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1.5em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .view-profile-btn:hover {
+      background-color: #e03e00;
+    }
+
+    .profile-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-modal-content {
+      background-color: white;
+      padding: 2em;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 80%;
+      text-align: left;
+    }
+
+    .profile-modal-content h3 {
+      color: #ff4500;
+    }
+
+    .close-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-top: 1em;
+    }
+
+    .close-btn:hover {
+      background-color: #e03e00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Training Agency - Assigned Trainees</h1>
+  </header>
+
+  <main>
+    <h2>Assigned Trainees</h2>
+
+    <!-- Trainee list section -->
+    <table class="trainee-list" id="traineeList">
+      <thead>
+        <tr>
+          <th>Trainee Name</th>
+          <th>Assigned Tasks</th>
+          <th>Progress</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="traineeTableBody">
+        <!-- Trainee list entries will be displayed here -->
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Modal for viewing trainee profile -->
+  <div id="profileModal" class="profile-modal">
+    <div class="profile-modal-content">
+      <h3 id="profileName"></h3>
+      <p><strong>Assigned Tasks:</strong> <span id="profileTasks"></span></p>
+      <p><strong>Training Progress:</strong> <span id="profileProgress"></span></p>
+      <p><strong>Contact Info:</strong> <span id="profileContact"></span></p>
+      <button class="close-btn" onclick="closeProfileModal()">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+
+  <script>
+    // Sample data for trainees
+    const trainees = [
+      {
+        name: 'John Doe',
+        tasks: 'Task A, Task B, Task C',
+        progress: '80%',
+        contact: 'john.doe@email.com'
+      },
+      {
+        name: 'Jane Smith',
+        tasks: 'Task D, Task E, Task F',
+        progress: '70%',
+        contact: 'jane.smith@email.com'
+      },
+      {
+        name: 'Michael Johnson',
+        tasks: 'Task G, Task H, Task I',
+        progress: '90%',
+        contact: 'michael.johnson@email.com'
+      }
+    ];
+
+    // Function to load the trainees list
+    function loadTrainees() {
+      const tableBody = document.getElementById('traineeTableBody');
+      trainees.forEach((trainee, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${trainee.name}</td>
+          <td>${trainee.tasks}</td>
+          <td>${trainee.progress}</td>
+          <td><button class="view-profile-btn" onclick="viewProfile(${index})">View Profile</button></td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Function to view the trainee profile
+    function viewProfile(index) {
+      const trainee = trainees[index];
+      document.getElementById('profileName').textContent = trainee.name;
+      document.getElementById('profileTasks').textContent = trainee.tasks;
+      document.getElementById('profileProgress').textContent = trainee.progress;
+      document.getElementById('profileContact').textContent = trainee.contact;
+
+      document.getElementById('profileModal').style.display = 'flex';
+    }
+
+    // Function to close the profile modal
+    function closeProfileModal() {
+      document.getElementById('profileModal').style.display = 'none';
+    }
+
+    // Load trainees when the page is loaded
+    window.onload = loadTrainees;
+  </script>
+</body>
+</html>

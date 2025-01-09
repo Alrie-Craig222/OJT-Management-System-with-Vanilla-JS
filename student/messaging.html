@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messaging Feature</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 1em;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ff4500;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-header {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1em;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .chat-messages {
+      height: 300px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      margin: 0.5em 0;
+      padding: 0.5em;
+      border-radius: 5px;
+    }
+
+    .message.student {
+      align-self: flex-end;
+      background-color: #ff4500;
+      color: white;
+    }
+
+    .message.coordinator {
+      align-self: flex-start;
+      background-color: #e0e0e0;
+      color: black;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 1em;
+      border-top: 1px solid #ff4500;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 0.5em;
+      border: 1px solid #ff4500;
+      border-radius: 5px;
+    }
+
+    .chat-input button {
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      padding: 0.5em 1em;
+      margin-left: 0.5em;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .chat-input button:hover {
+      background-color: #e03e00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Messaging Feature</h1>
+  </header>
+  <main>
+    <div class="chat-container">
+      <div class="chat-header">Chat with OJT Coordinator or Training Agency</div>
+      <div class="chat-messages" id="chatMessages">
+        <!-- Messages will be dynamically added here -->
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+  <script>
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+
+    // Sample predefined responses from the OJT Coordinator or Training Agency
+    const predefinedResponses = [
+      "Hello! How can I assist you today?",
+      "Thank you for the update. Please provide further details.",
+      "Your request has been noted. I’ll get back to you shortly.",
+      "Good progress! Keep it up!",
+    ];
+
+    // Function to send a message
+    function sendMessage() {
+      const messageText = chatInput.value.trim();
+
+      if (messageText) {
+        // Add student's message
+        const studentMessage = document.createElement('div');
+        studentMessage.classList.add('message', 'student');
+        studentMessage.textContent = messageText;
+        chatMessages.appendChild(studentMessage);
+
+        // Clear input field
+        chatInput.value = '';
+
+        // Scroll to the latest message
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Simulate a reply from the coordinator/agency after a delay
+        setTimeout(() => {
+          const coordinatorMessage = document.createElement('div');
+          coordinatorMessage.classList.add('message', 'coordinator');
+          const randomResponse =
+            predefinedResponses[
+              Math.floor(Math.random() * predefinedResponses.length)
+            ];
+          coordinatorMessage.textContent = randomResponse;
+          chatMessages.appendChild(coordinatorMessage);
+
+          // Scroll to the latest message
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>

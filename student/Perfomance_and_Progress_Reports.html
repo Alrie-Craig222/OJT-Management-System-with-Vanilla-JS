@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student OJT Performance</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      margin: 0.5em 0;
+      color: #ff4500;
+    }
+
+    table {
+      width: 80%;
+      margin: 1em auto;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ff4500;
+      padding: 0.8em;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ff4500;
+      color: white;
+    }
+
+    td {
+      background-color: white;
+      color: black;
+    }
+
+    button {
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      padding: 0.5em 1em;
+      margin-top: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #e03e00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>OJT Performance Dashboard</h1>
+  </header>
+  <main>
+    <h2>Your Progress Reports</h2>
+    <table id="performanceTable">
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Task</th>
+          <th>Status</th>
+          <th>Feedback</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be added dynamically -->
+      </tbody>
+    </table>
+    <button onclick="refreshReports()">Refresh Reports</button>
+  </main>
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+  <script>
+    // Sample data for OJT progress reports
+    const progressReports = [
+      { week: 1, task: "Orientation and Introduction", status: "Completed", feedback: "Great start!" },
+      { week: 2, task: "Documentation Review", status: "In Progress", feedback: "Needs more attention to detail." },
+      { week: 3, task: "System Testing", status: "Pending", feedback: "Awaiting submission." }
+    ];
+
+    // Function to populate the table with progress reports
+    function populateTable() {
+      const tableBody = document.querySelector("#performanceTable tbody");
+      tableBody.innerHTML = ""; // Clear existing rows
+
+      progressReports.forEach(report => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${report.week}</td>
+          <td>${report.task}</td>
+          <td>${report.status}</td>
+          <td>${report.feedback}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Function to refresh reports (simulate fetching new data)
+    function refreshReports() {
+      alert("Reports refreshed!");
+      populateTable();
+    }
+
+    // Populate the table on page load
+    document.addEventListener("DOMContentLoaded", populateTable);
+  </script>
+</body>
+</html>

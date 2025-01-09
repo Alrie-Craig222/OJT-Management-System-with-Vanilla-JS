@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitor and Evaluate Trainee Performance</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #ff4500;
+    }
+
+    .performance-table {
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      margin-top: 2em;
+    }
+
+    .performance-table th, .performance-table td {
+      padding: 12px;
+      border: 1px solid #ff4500;
+      text-align: center;
+    }
+
+    .performance-table th {
+      background-color: #ff4500;
+      color: white;
+    }
+
+    .performance-table td {
+      background-color: #f2f2f2;
+    }
+
+    .evaluate-button {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .evaluate-button:hover {
+      background-color: #e03e00;
+    }
+
+    .evaluation-status {
+      margin-top: 1em;
+      font-weight: bold;
+      color: green;
+    }
+
+    .evaluate-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 999;
+    }
+
+    .evaluate-modal textarea {
+      width: 100%;
+      padding: 1em;
+      margin-bottom: 1em;
+      border: 1px solid #ff4500;
+      border-radius: 5px;
+    }
+
+    .modal-buttons {
+      text-align: center;
+    }
+
+    .modal-buttons button {
+      padding: 0.5em 1em;
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 0 0.5em;
+      border-radius: 5px;
+    }
+
+    .modal-buttons button:hover {
+      background-color: #e03e00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Monitor and Evaluate Trainee Performance</h1>
+  </header>
+  <main>
+    <h2>Evaluate Trainee Submissions</h2>
+
+    <table class="performance-table">
+      <thead>
+        <tr>
+          <th>Trainee Name</th>
+          <th>Task Title</th>
+          <th>Submission Date</th>
+          <th>Status</th>
+          <th>Evaluate</th>
+        </tr>
+      </thead>
+      <tbody id="traineeTable">
+        <tr>
+          <td>John Doe</td>
+          <td>Report on Marketing</td>
+          <td>2024-11-20</td>
+          <td>Pending</td>
+          <td><button class="evaluate-button" onclick="openEvaluationModal('John Doe', 'Report on Marketing')">Evaluate</button></td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>Product Analysis</td>
+          <td>2024-11-21</td>
+          <td>Pending</td>
+          <td><button class="evaluate-button" onclick="openEvaluationModal('Jane Smith', 'Product Analysis')">Evaluate</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="evaluationStatus" class="evaluation-status"></div>
+
+    <div id="evaluateModal" class="evaluate-modal">
+      <h3>Evaluate Task</h3>
+      <p id="traineeInfo"></p>
+      <textarea id="evaluationComments" rows="4" placeholder="Provide feedback and evaluation comments"></textarea>
+      <div class="modal-buttons">
+        <button onclick="submitEvaluation()">Submit Evaluation</button>
+        <button onclick="closeEvaluationModal()">Cancel</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+
+  <script>
+    // Open the evaluation modal
+    function openEvaluationModal(traineeName, taskTitle) {
+      const modal = document.getElementById('evaluateModal');
+      const traineeInfo = document.getElementById('traineeInfo');
+      traineeInfo.textContent = `Trainee: ${traineeName} | Task: ${taskTitle}`;
+      modal.style.display = 'block';
+    }
+
+    // Close the evaluation modal
+    function closeEvaluationModal() {
+      const modal = document.getElementById('evaluateModal');
+      modal.style.display = 'none';
+    }
+
+    // Submit evaluation
+    function submitEvaluation() {
+      const comments = document.getElementById('evaluationComments').value;
+      if (comments.trim() === '') {
+        alert('Please provide evaluation comments.');
+        return;
+      }
+
+      const evaluationStatus = document.getElementById('evaluationStatus');
+      evaluationStatus.textContent = 'Evaluation submitted successfully!';
+
+      // Reset modal and comments
+      document.getElementById('evaluationComments').value = '';
+      closeEvaluationModal();
+
+      // Here, you could send the evaluation data to the backend via an API (e.g., using fetch or axios).
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assign Tasks or Projects to Trainees</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #ff4500;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      padding: 1em;
+      border: 1px solid #ff4500;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+
+    form input,
+    form select,
+    form textarea,
+    form button {
+      width: 100%;
+      padding: 0.5em;
+      margin-bottom: 1em;
+      border: 1px solid #ff4500;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    form button {
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    form button:hover {
+      background-color: #e03e00;
+    }
+
+    .task-status {
+      margin-top: 1em;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Assign Tasks or Projects</h1>
+  </header>
+  <main>
+    <h2>Assign a Task to a Trainee</h2>
+    <form id="taskForm">
+      <label for="traineeName">Trainee Name</label>
+      <input type="text" id="traineeName" placeholder="Enter trainee name" required />
+
+      <label for="taskTitle">Task Title</label>
+      <input type="text" id="taskTitle" placeholder="Enter task title" required />
+
+      <label for="taskDescription">Task Description</label>
+      <textarea id="taskDescription" placeholder="Enter task description" rows="4" required></textarea>
+
+      <label for="dueDate">Due Date</label>
+      <input type="date" id="dueDate" required />
+
+      <label for="priority">Priority Level</label>
+      <select id="priority" required>
+        <option value="" disabled selected>Select priority</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+
+      <button type="submit">Assign Task</button>
+    </form>
+
+    <div id="taskStatus" class="task-status"></div>
+  </main>
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+  <script>
+    const taskForm = document.getElementById("taskForm");
+    const taskStatus = document.getElementById("taskStatus");
+
+    taskForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      // Get input values
+      const traineeName = document.getElementById("traineeName").value;
+      const taskTitle = document.getElementById("taskTitle").value;
+      const taskDescription = document.getElementById("taskDescription").value;
+      const dueDate = document.getElementById("dueDate").value;
+      const priority = document.getElementById("priority").value;
+
+      // Simulate task assignment
+      const taskAssignment = {
+        traineeName,
+        taskTitle,
+        taskDescription,
+        dueDate,
+        priority,
+      };
+
+      // Display confirmation message
+      taskStatus.textContent = `Task "${taskTitle}" has been successfully assigned to ${traineeName}.`;
+
+      // Log the task to the console (This can be replaced with an API call to save the task)
+      console.log(taskAssignment);
+
+      // Reset the form
+      taskForm.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Forms Submission</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #ff4500;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+      padding: 1em;
+      border: 1px solid #ff4500;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+
+    form input,
+    form textarea,
+    form select,
+    form button {
+      width: 100%;
+      padding: 0.5em;
+      margin-bottom: 1em;
+      border: 1px solid #ff4500;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    form button {
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    form button:hover {
+      background-color: #e03e00;
+    }
+
+    .form-status {
+      margin-top: 1em;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Training Forms Submission</h1>
+  </header>
+  <main>
+    <h2>Fill Out and Submit Required Forms</h2>
+    <form id="trainingForm">
+      <label for="formTitle">Form Title</label>
+      <select id="formTitle" required>
+        <option value="" disabled selected>Select a form</option>
+        <option value="Weekly Progress Report">Weekly Progress Report</option>
+        <option value="Feedback Form">Feedback Form</option>
+        <option value="Completion Form">Completion Form</option>
+      </select>
+
+      <label for="studentName">Student Name</label>
+      <input type="text" id="studentName" placeholder="Enter your full name" required />
+
+      <label for="submissionDate">Submission Date</label>
+      <input type="date" id="submissionDate" required />
+
+      <label for="formContent">Form Content</label>
+      <textarea id="formContent" placeholder="Enter the required details here" rows="5" required></textarea>
+
+      <button type="submit">Submit Form</button>
+    </form>
+
+    <div id="formStatus" class="form-status"></div>
+  </main>
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+  <script>
+    const form = document.getElementById("trainingForm");
+    const formStatus = document.getElementById("formStatus");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      // Simulate form submission
+      const formTitle = document.getElementById("formTitle").value;
+      const studentName = document.getElementById("studentName").value;
+      const submissionDate = document.getElementById("submissionDate").value;
+      const formContent = document.getElementById("formContent").value;
+
+      // Display success message
+      formStatus.textContent = `Form "${formTitle}" submitted successfully by ${studentName} on ${submissionDate}.`;
+      form.reset(); // Reset the form fields
+    });
+  </script>
+</body>
+</html>

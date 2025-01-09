@@ -41,6 +41,8 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
          window.location.href = 'coordinator/index.html';
       } else if (userRole === 'student') {
          window.location.href = 'student/index.html';
+      }else if (userRole === 'training_agency') {
+         window.location.href = 'Training_Agency/index.html';
       } else {
          alert('Role not recognized. Please contact support.');
       }

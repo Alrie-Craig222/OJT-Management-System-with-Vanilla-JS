@@ -1,367 +1,308 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-
-    <title>OJT-Records-Monitoring-System</title>
-
-    <!-- Bootstrap Core and vandor -->
-    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/css/animate.min.css">
-
-    <!-- Plugins css -->
-    <script defer src="../assets/plugins/fontawesome/js/all.min.js"></script>
-
-    <!-- Core css -->
-    <link rel="stylesheet" href="../assets/css/main.css" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of All Trainees</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff4500; /* Red-Orange color */
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ff4500; /* Red-Orange border */
+            border-radius: 5px;
+            background-color: #fff3e6; /* Light orange background */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ff4500; /* Red-Orange border */
+            text-align: left;
+        }
+        th {
+            background-color: #ff4500; /* Red-Orange header */
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .read-btn {
+            background-color: #4caf50; /* Green for Read */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .read-btn:hover {
+            background-color: #45a049;
+        }
+        .edit-btn {
+            background-color: #2196f3; /* Blue for Edit */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .edit-btn:hover {
+            background-color: #0b7dda;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+        }
+        .modal-header {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: #ff4500; /* Red-Orange header */
+        }
+        .modal-content {
+            margin-bottom: 20px;
+        }
+        .modal-content label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ff4500; /* Red-Orange border */
+            border-radius: 4px;
+        }
+        .save-btn {
+            background-color: #4caf50; /* Green for Save */
+            color: white;
+        }
+        .save-btn:hover {
+            background-color: #45a049;
+        }
+        .close-btn {
+            background-color: #f44336; /* Red for Close */
+            color: white;
+            float: right;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+        }
+        .close-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
 </head>
-
-<body class="font-montserrat">
-
-
-    <div id="main_content">
-        
-        <div id="left-sidebar" class="sidebar ">
-            <h5 class="brand-name">OJT - RMS <a href="javascript:void(0)" class="menu_option float-right"><i
-                        class="fa fa-table font-16" data-toggle="tooltip" data-placement="left"
-                        title="Grid & List Toggle"></i></a></h5>
-            <nav id="left-sidebar-nav" class="sidebar-nav">
-                <ul class="metismenu">
-                    <li class="g_heading">Menu</li>
-                    <li><a href="index.html"><i class="fa fa-home text-success"></i><span>
-                                Dashboard</span></a>
-                    </li>
-                    <li class="active"><a href="student.html"><i class="fa fa-users text-warning"></i><span>
-                                Master List</span></a>
-                    </li>
-                    <li><a href="task.html"><i class="fa fa-tasks text-success"></i><span> Tasks</span></a>
-                    </li>
-                    <li><a href="task_done.html"><i class="fa fa-file text-success"></i><span> Task Submitted</span></a>
-                    </li>
-                    <li><a href="message.html"><i class="fa fa-envelope text-success"></i><span> Message</span></a>
-                    </li>
-                    <li><a href="reports.html"><i class="fa fa-chart-bar text-success"></i><span> Reports</span></a>
-                    </li>
-                </ul>
-            </nav>
+<body>
+    <div class="container">
+        <h1>List of All Trainees</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search by name, student ID, or email" onkeyup="searchTrainees()">
         </div>
+        <table id="traineeTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Student ID</th>
+                    <th>Course</th>
+                    <th>Year</th>
+                    <th>Deployed</th>
+                    <th>Evaluated</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="traineeBody">
+                <!-- Trainee rows will be inserted here -->
+            </tbody>
+        </table>
+    </div>
 
-        <div class="page">
-            <div id="page_top" class="section-body top_dark">
-                <div class="container-fluid">
-                    <div class="page-header">
-                        <div class="left">
-                            <h1 class="page-title"><i class="fa fa-user"></i> Students</h1>
-                        </div>
-                        <div class="right">
-                            <div class="notification d-flex">
-                                <div class="dropdown d-flex">
-                                    <a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-2"
-                                        data-toggle="dropdown"><i class="fa fa-user"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="page-profile.html"><i
-                                                class="fa fa-user"></i> Profile</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fa fa-cog"></i> Settings</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="../index.html"><i
-                                                class="fa fa-power-off"></i> Sign out</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section-body mt-3">
-                <div class="container-fluid">
-                    <div class="row clearfix">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-md-flex justify-content-between mb-2">
-                                        <ul class="nav nav-tabs b-none">
-                                            <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                    href="#list"><i class="fa fa-list-ul"> </i> Students List</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#addnew"><i
-                                                        class="fa fa-plus"></i> Add New</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <div class="input-group mb-1">
-                                                <input type="text" class="form-control" placeholder="Search student">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12">
-                                            <a href="javascript:void(0);" class="btn btn-primary btn-block mb-1"
-                                                title="">Search</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section-body">
-                <div class="container-fluid">
-                    <div class="tab-content">
-                        <div class="tab-pane fade show active" id="list" role="tabpanel">
-                            <div class="row clearfix">
-                                <div class="col-xl-12 col-lg-12 col-md-12">
-                                    <div class="card">
-                                        <table id="myTable" class="table app-table-hover mb-0 text-left">
-                                            <thead>
-                                                <tr>
-                                                    <th class="cell">School ID</th>
-                                                    <th class="cell">Full Name</th>
-                                                    <th class="cell">Course</th>
-                                                    <th class="cell">Contact</th>
-                                                    <th class="cell">Email</th>
-                                                    <th class="cell">Address</th>
-                                                    <th class="cell">School Year</th>
-                                                    <th class="cell">Organization</th>
-                                                    <th class="text-right">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>123-456</td>
-                                                    <td>John Doe</td>
-                                                    <td>BSIT</td>
-                                                    <td>09876654321</td>
-                                                    <td>john@gmail.com</td>
-                                                    <td>Manggahan, Pasig</td>
-                                                    <td>2020 - 2021</td>
-                                                    <td>Organization 1</td>
-                                                    <td class="text-right">
-                                                        <div class="dropdown dropdown-action">
-                                                            <a href="#" class="action-icon dropdown-toggle"
-                                                                data-toggle="dropdown" aria-expanded="false"><i
-                                                                    class="fa fa-ellipsis-v"></i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                    data-target="#edit_student"><i
-                                                                        class="fa fa-pen m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                    data-target="#delete_student"><i
-                                                                        class="fa fa-trash m-r-5"></i> Delete</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="addnew" role="tabpanel">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title"><i></i>Add Trainee</h3>
-                                        </div>
-                                        <form class="card-body">
-                                            <div class="row clearfix">
-                                                <div class="col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>School ID Number</label>
-                                                        <input type="number" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Full Name</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Course</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Contact</label>
-                                                        <input type="number" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <label>School Year</label>
-                                                    <select class="form-control show-tick">
-                                                        <option value="">-- School Year --</option>
-                                                        <option value="10">2019 - 2020</option>
-                                                        <option value="20">2020 - 2021</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <label>Organization</label>
-                                                    <select class="form-control show-tick">
-                                                        <option value="">-- Organization --</option>
-                                                        <option value="10">Organization 1</option>
-                                                        <option value="20">Organization 2</option>
-                                                    </select>
-                                                </div><br>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Username</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Password</label>
-                                                        <input type="password" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                    <button type="submit"
-                                                        class="btn btn-outline-secondary">Cancel</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="delete_student" class="modal fade delete-modal animated rubberBand" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body text-center">
-                        <img src="../assets/images/sent.png" alt="" width="50" height="46">
-                        <h3>Are you sure want to delete this Student?</h3>
-                        <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="edit_student" class="modal fade delete-modal animated rubberBand" role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h3 class="card-title"><i></i>Update Trainee</h3>
-                                        </div>
-                                        <form class="card-body">
-                                            <div class="row clearfix">
-                                                <div class="col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>School ID Number</label>
-                                                        <input type="number" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-8 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Full Name</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Course</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Contact</label>
-                                                        <input type="number" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <label>School Year</label>
-                                                    <select class="form-control show-tick">
-                                                        <option value="">-- School Year --</option>
-                                                        <option value="10">2019 - 2020</option>
-                                                        <option value="20">2020 - 2021</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <label>Organization</label>
-                                                    <select class="form-control show-tick">
-                                                        <option value="">-- Organization --</option>
-                                                        <option value="10">Organization 1</option>
-                                                        <option value="20">Organization 2</option>
-                                                    </select>
-                                                </div><br>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Username</label>
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Password</label>
-                                                        <input type="password" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <button type="submit" class="btn btn-primary">Update</button>
-                                                    <button type="submit"
-                                                        class="btn btn-outline-secondary">Cancel</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                </div>
-            </div>
+    <!-- Modal for Viewing/Editing Trainee Details -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+    <div id="traineeModal" class="modal">
+        <button class="close-btn" onclick="closeModal()">X</button>
+        <div class="modal-header">Edit Trainee Details</div>
+        <div class="modal-content">
+            <label>Name:</label>
+            <input type="text" id="editName">
+            <label>Email:</label>
+            <input type="email" id="editEmail">
+            <label>Student ID:</label>
+            <input type="text" id="editStudentId">
+            <label>Course:</label>
+            <input type="text" id="editCourse">
+            <label>Year:</label>
+            <input type="number" id="editYear">
+            <label>Deployed:</label>
+            <input type="text" id="editDeployment">
+            <label>Evaluated:</label>
+            <input type="text" id="editEvaluation">
+            <label>Completed:</label>
+            <input type="text" id="editCompletion">
+            <button class="save-btn" onclick="saveChanges()">Save Changes</button>
         </div>
     </div>
 
-    <script src="../assets/bundles/lib.vendor.bundle.js"></script>
+    <script>
+        const trainees = [
+            { id: 1, name: "Francis Adrian Altesing", email: "francisadrian.altesing@gmail.com", studentId: "202-00005", course: "BSIT", year: 4, deployed: "YES", evaluated: "NO", completed: "NO" },
+            { id: 2, name: "John Wick", email: "ilovedogs143@gmail.com", studentId: "202-00006", course: "BSIT", year: 4, deployed: "YES", evaluated: "NO", completed: "NO" },
+            // Add more trainees here...
+        ];
 
-    <script src="../assets/plugins/dropify/js/dropify.min.js"></script>
+        let selectedTrainee = null;
 
-    <script src="../assets/js/core.js"></script>
-    <script src="../assets/js/form/dropify.js"></script>
+        function loadTrainees() {
+            const tbody = document.getElementById('traineeBody');
+            tbody.innerHTML = '';
+            trainees.forEach(trainee => {
+                const row = `<tr>
+                    <td>${trainee.name}</td>
+                    <td>${trainee.email}</td>
+                    <td>${trainee.studentId}</td>
+                    <td>${trainee.course}</td>
+                    <td>${trainee.year}</td>
+                    <td>${trainee.deployed}</td>
+                    <td>${trainee.evaluated}</td>
+                    <td>${trainee.completed}</td>
+                    <td>
+                        <button class="read-btn" onclick="viewDetails(${trainee.id})">Read</button>
+                        <button class="edit-btn" onclick="editTrainee(${trainee.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteTrainee(${trainee.id})">Delete</button>
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function searchTrainees() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const filteredTrainees = trainees.filter(trainee =>
+                trainee.name.toLowerCase().includes(input) ||
+                trainee.studentId.toLowerCase().includes(input) ||
+                trainee.email.toLowerCase().includes(input)
+            );
+
+            const tbody = document.getElementById('traineeBody');
+            tbody.innerHTML = '';
+            filteredTrainees.forEach(trainee => {
+                const row = `<tr>
+                    <td>${trainee.name}</td>
+                    <td>${trainee.email}</td>
+                    <td>${trainee.studentId}</td>
+                    <td>${trainee.course}</td>
+                    <td>${trainee.year}</td>
+                    <td>${trainee.deployed}</td>
+                    <td>${trainee.evaluated}</td>
+                    <td>${trainee.completed}</td>
+                    <td>
+                        <button class="read-btn" onclick="viewDetails(${trainee.id})">Read</button>
+                        <button class="edit-btn" onclick="editTrainee(${trainee.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteTrainee(${trainee.id})">Delete</button>
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function editTrainee(id) {
+            selectedTrainee = trainees.find(t => t.id === id);
+            document.getElementById('editName').value = selectedTrainee.name;
+            document.getElementById('editEmail').value = selectedTrainee.email;
+            document.getElementById('editStudentId').value = selectedTrainee.studentId;
+            document.getElementById('editCourse').value = selectedTrainee.course;
+            document.getElementById('editYear').value = selectedTrainee.year;
+            document.getElementById('editDeployment').value = selectedTrainee.deployed;
+            document.getElementById('editEvaluation').value = selectedTrainee.evaluated;
+            document.getElementById('editCompletion').value = selectedTrainee.completed;
+            document.getElementById('modalOverlay').style.display = 'block';
+            document.getElementById('traineeModal').style.display = 'block';
+        }
+
+        function viewDetails(id) {
+            const trainee = trainees.find(t => t.id === id);
+            alert(`Name: ${trainee.name}\nEmail: ${trainee.email}\nStudent ID: ${trainee.studentId}\nCourse: ${trainee.course}\nYear: ${trainee.year}\nDeployed: ${trainee.deployed}\nEvaluated: ${trainee.evaluated}\nCompleted: ${trainee.completed}`);
+        }
+
+        function saveChanges() {
+            if (selectedTrainee) {
+                selectedTrainee.name = document.getElementById('editName').value;
+                selectedTrainee.email = document.getElementById('editEmail').value;
+                selectedTrainee.studentId = document.getElementById('editStudentId').value;
+                selectedTrainee.course = document.getElementById('editCourse').value;
+                selectedTrainee.year = document.getElementById('editYear').value;
+                selectedTrainee.deployed = document.getElementById('editDeployment').value;
+                selectedTrainee.evaluated = document.getElementById('editEvaluation').value;
+                selectedTrainee.completed = document.getElementById('editCompletion').value;
+                loadTrainees();
+                closeModal();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.getElementById('traineeModal').style.display = 'none';
+        }
+        function deleteTrainee(id) {
+            const confirmed = confirm("Are you sure you want to delete this trainee?");
+            if (confirmed) {
+                const index = trainees.findIndex(t => t.id === id);
+                if (index !== -1) {
+                    trainees.splice(index, 1);
+                    loadTrainees();
+                }
+            }
+        }
+
+        // Load trainees on page load
+        window.onload = loadTrainees;
+    </script>
 </body>
-
 </html>

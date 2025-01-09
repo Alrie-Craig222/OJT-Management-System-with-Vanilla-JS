@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Monitor Trainee Progress</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff4500;
+    }
+
+    .trainee-list {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 2em;
+      text-align: left;
+      border-collapse: collapse;
+    }
+
+    .trainee-list th, .trainee-list td {
+      padding: 1em;
+      border: 1px solid #ddd;
+    }
+
+    .trainee-list th {
+      background-color: #ff4500;
+      color: white;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      margin-top: 0.5em;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 10px;
+      border-radius: 10px;
+    }
+
+    .completed {
+      background-color: #76c7c0; /* Completed progress */
+    }
+
+    .in-progress {
+      background-color: #ffb84d; /* In-progress color */
+    }
+
+    .not-started {
+      background-color: #ff4d4d; /* Not started color */
+    }
+
+    .filter {
+      margin-top: 2em;
+      margin-bottom: 1em;
+    }
+
+    .filter select {
+      padding: 0.5em;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin - Monitor Trainee Progress</h1>
+  </header>
+
+  <main>
+    <div class="filter">
+      <label for="statusFilter">Filter by Progress:</label>
+      <select id="statusFilter" onchange="filterTrainees()">
+        <option value="all">All Trainees</option>
+        <option value="completed">Completed</option>
+        <option value="in-progress">In Progress</option>
+        <option value="not-started">Not Started</option>
+      </select>
+    </div>
+
+    <table class="trainee-list">
+      <thead>
+        <tr>
+          <th>Trainee Name</th>
+          <th>Task Completion</th>
+          <th>Attendance</th>
+          <th>Performance</th>
+        </tr>
+      </thead>
+      <tbody id="traineeList">
+        <!-- Trainee data will be displayed here -->
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+
+  <script>
+    // Sample data for trainees
+    const trainees = [
+      { name: 'John Doe', taskCompletion: 80, attendance: 90, performance: 85, status: 'in-progress' },
+      { name: 'Jane Smith', taskCompletion: 100, attendance: 95, performance: 90, status: 'completed' },
+      { name: 'Emily Johnson', taskCompletion: 60, attendance: 85, performance: 75, status: 'in-progress' },
+      { name: 'Chris Lee', taskCompletion: 40, attendance: 50, performance: 60, status: 'not-started' }
+    ];
+
+    // Function to render the trainee list
+    function renderTrainees(filteredStatus = 'all') {
+      const traineeList = document.getElementById('traineeList');
+      traineeList.innerHTML = ''; // Clear current list
+
+      // Filter trainees by status
+      const filteredTrainees = trainees.filter(trainee => {
+        return filteredStatus === 'all' || trainee.status === filteredStatus;
+      });
+
+      // Render each trainee's data
+      filteredTrainees.forEach(trainee => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${trainee.name}</td>
+          <td><div class="progress-bar">
+            <span class="completed" style="width: ${trainee.taskCompletion}%"></span>
+          </div></td>
+          <td><div class="progress-bar">
+            <span class="completed" style="width: ${trainee.attendance}%"></span>
+          </div></td>
+          <td><div class="progress-bar">
+            <span class="completed" style="width: ${trainee.performance}%"></span>
+          </div></td>
+        `;
+        traineeList.appendChild(row);
+      });
+    }
+
+    // Function to filter trainees based on the dropdown selection
+    function filterTrainees() {
+      const statusFilter = document.getElementById('statusFilter').value;
+      renderTrainees(statusFilter);
+    }
+
+    // Initial render of all trainees
+    renderTrainees();
+  </script>
+</body>
+</html>

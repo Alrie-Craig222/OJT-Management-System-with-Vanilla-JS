@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Oversee Communication</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+    }
+
+    h1 {
+      color: #ff4500;
+      text-align: center;
+    }
+
+    .communication-dashboard {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .message-list, .message-detail {
+      width: 48%;
+    }
+
+    .message-item {
+      padding: 1em;
+      border: 1px solid #ddd;
+      margin-bottom: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .message-item:hover {
+      background-color: #f4f4f4;
+    }
+
+    .message-item.flagged {
+      background-color: #ffcccb;
+    }
+
+    .message-detail-header {
+      margin-bottom: 1em;
+    }
+
+    .message-detail-content {
+      background-color: #f9f9f9;
+      padding: 1em;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .message-detail-content p {
+      margin: 0;
+    }
+
+    .filter-options select {
+      padding: 0.5em;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      margin: 0 1em 1em 0;
+    }
+
+    .flag-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .flag-btn:hover {
+      background-color: #e43e00;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin - Communication Dashboard</h1>
+  </header>
+
+  <main>
+    <div class="filter-options">
+      <label for="userType">Filter by User:</label>
+      <select id="userType">
+        <option value="all">All Users</option>
+        <option value="trainee">Trainees</option>
+        <option value="coordinator">Coordinators</option>
+        <option value="agency">Training Agencies</option>
+      </select>
+    </div>
+
+    <div class="communication-dashboard">
+      <div class="message-list" id="messageList">
+        <!-- Message list will be injected here -->
+      </div>
+
+      <div class="message-detail" id="messageDetail">
+        <div class="message-detail-header">
+          <h2>Message Details</h2>
+        </div>
+        <div class="message-detail-content" id="messageContent">
+          <!-- Detailed message content will be injected here -->
+        </div>
+        <button class="flag-btn" id="flagButton" style="display: none;" onclick="flagMessage()">Flag Message</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+
+  <script>
+    // Sample data for messages
+    const messages = [
+      { id: 1, sender: 'Trainee', receiver: 'Coordinator', content: 'How do I submit my report?', flagged: false },
+      { id: 2, sender: 'Coordinator', receiver: 'Trainee', content: 'Please submit it by Friday.', flagged: false },
+      { id: 3, sender: 'Training Agency', receiver: 'Trainee', content: 'Can you confirm your availability for the training schedule?', flagged: false },
+      { id: 4, sender: 'Trainee', receiver: 'Training Agency', content: 'I am available on Monday morning.', flagged: false }
+    ];
+
+    let selectedMessageId = null;
+
+    // Function to display the messages in the message list
+    function displayMessages(filter = 'all') {
+      const messageList = document.getElementById('messageList');
+      messageList.innerHTML = ''; // Clear the existing message list
+
+      const filteredMessages = messages.filter(message => {
+        if (filter === 'all') return true;
+        if (filter === 'trainee' && message.sender === 'Trainee') return true;
+        if (filter === 'coordinator' && message.sender === 'Coordinator') return true;
+        if (filter === 'agency' && message.sender === 'Training Agency') return true;
+        return false;
+      });
+
+      filteredMessages.forEach(message => {
+        const messageItem = document.createElement('div');
+        messageItem.classList.add('message-item');
+        if (message.flagged) messageItem.classList.add('flagged');
+        messageItem.textContent = `${message.sender} to ${message.receiver}: ${message.content}`;
+        messageItem.onclick = () => displayMessageDetail(message.id);
+        messageList.appendChild(messageItem);
+      });
+    }
+
+    // Function to display the details of the selected message
+    function displayMessageDetail(messageId) {
+      selectedMessageId = messageId;
+      const message = messages.find(msg => msg.id === messageId);
+      const messageContent = document.getElementById('messageContent');
+      const flagButton = document.getElementById('flagButton');
+
+      messageContent.innerHTML = `<p><strong>From:</strong> ${message.sender}</p>
+                                  <p><strong>To:</strong> ${message.receiver}</p>
+                                  <p><strong>Message:</strong> ${message.content}</p>`;
+      flagButton.style.display = 'inline-block';
+    }
+
+    // Function to flag or unflag a message
+    function flagMessage() {
+      if (selectedMessageId === null) return;
+
+      const message = messages.find(msg => msg.id === selectedMessageId);
+      message.flagged = !message.flagged;
+
+      // Re-render the message list with updated flag status
+      displayMessages(document.getElementById('userType').value);
+    }
+
+    // Filter messages based on user type selection
+    document.getElementById('userType').addEventListener('change', event => {
+      displayMessages(event.target.value);
+    });
+
+    // Initially display all messages
+    displayMessages();
+  </script>
+</body>
+</html>

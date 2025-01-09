@@ -47,3 +47,116 @@ nav ul li :hover{
 	width: 100px;
 	
 }
+
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    margin: 0;
+    padding: 0;
+  }
+  
+  #container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  #logo {
+    text-align: center;
+    color: #ff4500; /* Red-orange */
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+  
+  #formGroup {
+    background-color: #1a1a1a; /* Dark gray */
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  #formSubmit label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ff4500;
+  }
+  
+  #formSubmit input,
+  #formSubmit button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 2px solid #ff4500;
+    background-color: #000;
+    color: #fff;
+  }
+  
+  #formSubmit button {
+    background-color: #ff4500;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  #formSubmit button:hover {
+    background-color: #ff6347; /* Lighter red-orange */
+  }
+  
+  #filterContainer {
+    margin: 15px 0;
+  }
+  
+  #filter {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #ff4500;
+    border-radius: 8px;
+  }
+  
+  #tasksContainer {
+    margin-top: 15px;
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #000;
+    border: 2px solid #ff4500;
+    color: #fff;
+  }
+  
+  .task-item .task-details {
+    flex: 1;
+    margin-left: 10px;
+  }
+  
+  .task-item .checkbox {
+    cursor: pointer;
+  }
+  
+  .task-item.done {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+  
+  .overdue-note {
+    color: red;
+    font-weight: bold;
+  }
+  
+
+

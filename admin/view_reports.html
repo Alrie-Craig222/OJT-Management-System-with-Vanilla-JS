@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Generate Reports</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff4500;
+    }
+
+    .report-options {
+      margin-top: 2em;
+    }
+
+    .report-options select, .report-options input {
+      padding: 0.5em;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      margin-right: 1em;
+    }
+
+    .report-table {
+      width: 80%;
+      margin: 2em auto;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .report-table th, .report-table td {
+      padding: 1em;
+      border: 1px solid #ddd;
+    }
+
+    .report-table th {
+      background-color: #ff4500;
+      color: white;
+    }
+
+    .generate-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .generate-btn:hover {
+      background-color: #e43e00;
+    }
+
+    .download-btn {
+      background-color: #2d87d7;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1em;
+    }
+
+    .download-btn:hover {
+      background-color: #2276bb;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin - Generate Reports</h1>
+  </header>
+
+  <main>
+    <div class="report-options">
+      <label for="reportType">Choose Report Type:</label>
+      <select id="reportType">
+        <option value="performance">Performance Report</option>
+        <option value="attendance">Attendance Report</option>
+        <option value="submitted">Submitted Requirements</option>
+      </select>
+
+      <label for="dateRange">Date Range:</label>
+      <input type="date" id="startDate">
+      <input type="date" id="endDate">
+
+      <button class="generate-btn" onclick="generateReport()">Generate Report</button>
+    </div>
+
+    <table class="report-table" id="reportTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Trainee Name</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Report data will be injected here -->
+      </tbody>
+    </table>
+
+    <button class="download-btn" id="downloadBtn" style="display: none;" onclick="downloadReport()">Download as CSV</button>
+  </main>
+
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+
+  <script>
+    // Sample data for trainees
+    const trainees = [
+      { name: 'John Doe', performance: 85, attendance: 90, requirements: '3', reportDate: '2024-10-01' },
+      { name: 'Jane Smith', performance: 90, attendance: 95, requirements: '5', reportDate: '2024-10-02' },
+      { name: 'Emily Johnson', performance: 75, attendance: 80, requirements: '2', reportDate: '2024-10-01' },
+      { name: 'Chris Lee', performance: 60, attendance: 65, requirements: '1', reportDate: '2024-10-03' }
+    ];
+
+    // Function to generate reports based on selected type and date range
+    function generateReport() {
+      const reportType = document.getElementById('reportType').value;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+
+      const filteredTrainees = trainees.filter(trainee => {
+        const date = trainee.reportDate;
+        const isInDateRange = (!startDate || date >= startDate) && (!endDate || date <= endDate);
+
+        return isInDateRange && (
+          (reportType === 'performance' && trainee.performance !== undefined) ||
+          (reportType === 'attendance' && trainee.attendance !== undefined) ||
+          (reportType === 'submitted' && trainee.requirements !== undefined)
+        );
+      });
+
+      // Render the filtered report data
+      const reportTableBody = document.getElementById('reportTable').querySelector('tbody');
+      reportTableBody.innerHTML = ''; // Clear previous data
+
+      filteredTrainees.forEach(trainee => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${trainee.name}</td>
+          <td>
+            ${reportType === 'performance' ? 'Performance: ' + trainee.performance + '%' :
+             reportType === 'attendance' ? 'Attendance: ' + trainee.attendance + '%' :
+             'Submitted Requirements: ' + trainee.requirements}
+          </td>
+        `;
+        reportTableBody.appendChild(row);
+      });
+
+      // Display the report table and download button
+      document.getElementById('reportTable').style.display = 'table';
+      document.getElementById('downloadBtn').style.display = 'inline-block';
+    }
+
+    // Function to download the report as a CSV file
+    function downloadReport() {
+      const reportType = document.getElementById('reportType').value;
+      const table = document.getElementById('reportTable');
+      const rows = Array.from(table.querySelectorAll('tr'));
+      let csvContent = 'Trainee Name,Details\n';
+
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const rowData = Array.from(cells).map(cell => cell.innerText).join(',');
+        csvContent += rowData + '\n';
+      });
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'report.csv';
+      link.click();
+    }
+  </script>
+</body>
+</html>

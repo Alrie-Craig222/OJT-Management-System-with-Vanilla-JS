@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <title>Reports - OJT Records Monitoring System</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/animate.min.css">
+
+    <!-- Fontawesome -->
+    <script defer src="../assets/plugins/fontawesome/js/all.min.js"></script>
+
+    <!-- Core css -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+
+<body class="font-montserrat">
+
+    <div id="main_content">
+        <!-- Sidebar -->
+        <div id="left-sidebar" class="sidebar">
+            <h5 class="brand-name">
+                OJT - RMS
+                <a href="javascript:void(0)" class="menu_option float-right">
+                    <i class="fa fa-bars font-16" data-toggle="tooltip" title="Toggle Menu"></i>
+                </a>
+            </h5>
+            <nav id="left-sidebar-nav" class="sidebar-nav">
+                <ul class="metismenu">
+                    <li class="g_heading">Menu</li>
+                    <li><a href="dashboard.html"><i class="fa fa-home text-primary"></i><span>Dashboard</span></a></li>
+                    <li><a href="trainees.html"><i class="fa fa-users text-success"></i><span>Assigned Trainees</span></a></li>
+                    <li><a href="Feedback.html"><i class="fa fa-comments text-warning"></i><span>Feedback</span></a></li>
+                    <li><a href="reports.html"><i class="fa fa-chart-line text-info"></i><span>Reports</span></a></li>
+                    <li><a href="messaging.html"><i class="fa fa-envelope text-danger"></i><span>Messaging</span></a>
+                    </ul>
+            </nav>
+        </div>
+
+        <!-- Main Page -->
+        <div class="page">
+            <!-- Top Navigation -->
+            <div id="page_top" class="section-body top_dark">
+                <div class="container-fluid">
+                    <div class="page-header d-flex justify-content-between align-items-center">
+                        <h1 class="page-title"><i class="fa fa-chart-line"></i> Reports</h1>
+                        <div class="dropdown">
+                            <a class="nav-link icon btn btn-default btn-icon" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="page-profile.html"><i class="fa fa-user"></i> Profile</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-cog"></i> Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../index.html"><i class="fa fa-power-off"></i> Sign out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="section-body mt-3">
+                <div class="container-fluid">
+                    <!-- Filters Section -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label for="reportType" class="form-label">Report Type</label>
+                            <select class="form-control" id="reportType">
+                                <option value="performance">Performance</option>
+                                <option value="attendance">Attendance</option>
+                                <option value="progress">Overall Progress</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="dateRange" class="form-label">Date Range</label>
+                            <input type="date" class="form-control" id="startDate">
+                            <input type="date" class="form-control mt-2" id="endDate">
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button class="btn btn-primary w-100">Generate Report</button>
+                        </div>
+                    </div>
+
+                    <!-- Reports Summary -->
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fa fa-check-circle text-success fa-3x mb-3"></i>
+                                    <h4>Completed Tasks</h4>
+                                    <h2 class="h1 mb-0">120</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fa fa-clock text-warning fa-3x mb-3"></i>
+                                    <h4>Pending Tasks</h4>
+                                    <h2 class="h1 mb-0">45</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fa fa-chart-bar text-info fa-3x mb-3"></i>
+                                    <h4>Attendance Rate</h4>
+                                    <h2 class="h1 mb-0">85%</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Reports -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Detailed Report</h3>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Trainee Name</th>
+                                                <th>Performance Score</th>
+                                                <th>Attendance</th>
+                                                <th>Progress</th>
+                                                <th>Remarks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>John Doe</td>
+                                                <td>90%</td>
+                                                <td>92%</td>
+                                                <td>85%</td>
+                                                <td>Excellent</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Jane Smith</td>
+                                                <td>80%</td>
+                                                <td>85%</td>
+                                                <td>78%</td>
+                                                <td>Good</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Mark Lee</td>
+                                                <td>75%</td>
+                                                <td>88%</td>
+                                                <td>70%</td>
+                                                <td>Needs Improvement</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/bundles/lib.vendor.bundle.js"></script>
+    <script src="../assets/js/core.js"></script>
+</body>
+
+</html>

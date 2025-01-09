@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Agency - Provide Feedback on Trainee Performance</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #ff4500;
+    }
+
+    .trainee-list {
+      margin-top: 3em;
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    .trainee-list th, .trainee-list td {
+      padding: 12px;
+      border: 1px solid #ff4500;
+    }
+
+    .trainee-list th {
+      background-color: #ff4500;
+      color: white;
+    }
+
+    .trainee-list td {
+      background-color: #f2f2f2;
+    }
+
+    .feedback-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1.5em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .feedback-btn:hover {
+      background-color: #e03e00;
+    }
+
+    .feedback-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .feedback-modal-content {
+      background-color: white;
+      padding: 2em;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 80%;
+      text-align: left;
+    }
+
+    .feedback-modal-content h3 {
+      color: #ff4500;
+    }
+
+    .close-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-top: 1em;
+    }
+
+    .close-btn:hover {
+      background-color: #e03e00;
+    }
+
+    .submit-feedback-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-top: 1em;
+    }
+
+    .submit-feedback-btn:hover {
+      background-color: #e03e00;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Training Agency - Provide Feedback on Trainee Performance</h1>
+  </header>
+
+  <main>
+    <h2>Assigned Trainees</h2>
+
+    <!-- Trainee list section -->
+    <table class="trainee-list" id="traineeList">
+      <thead>
+        <tr>
+          <th>Trainee Name</th>
+          <th>Assigned Tasks</th>
+          <th>Training Progress</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="traineeTableBody">
+        <!-- Trainee list entries will be displayed here -->
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Modal for providing feedback -->
+  <div id="feedbackModal" class="feedback-modal">
+    <div class="feedback-modal-content">
+      <h3 id="feedbackTraineeName"></h3>
+      <p><strong>Assigned Tasks:</strong> <span id="feedbackTraineeTasks"></span></p>
+      <p><strong>Training Progress:</strong> <span id="feedbackTraineeProgress"></span></p>
+      <textarea id="feedbackText" placeholder="Enter your feedback here..."></textarea>
+      <button class="submit-feedback-btn" onclick="submitFeedback()">Submit Feedback</button>
+      <button class="close-btn" onclick="closeFeedbackModal()">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+
+  <script>
+    // Sample data for trainees
+    const trainees = [
+      {
+        name: 'John Doe',
+        tasks: 'Task A, Task B, Task C',
+        progress: '80%',
+        feedback: ''
+      },
+      {
+        name: 'Jane Smith',
+        tasks: 'Task D, Task E, Task F',
+        progress: '70%',
+        feedback: ''
+      },
+      {
+        name: 'Michael Johnson',
+        tasks: 'Task G, Task H, Task I',
+        progress: '90%',
+        feedback: ''
+      }
+    ];
+
+    // Function to load the trainees list
+    function loadTrainees() {
+      const tableBody = document.getElementById('traineeTableBody');
+      trainees.forEach((trainee, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${trainee.name}</td>
+          <td>${trainee.tasks}</td>
+          <td>${trainee.progress}</td>
+          <td><button class="feedback-btn" onclick="provideFeedback(${index})">Provide Feedback</button></td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Function to provide feedback for a trainee
+    function provideFeedback(index) {
+      const trainee = trainees[index];
+      document.getElementById('feedbackTraineeName').textContent = trainee.name;
+      document.getElementById('feedbackTraineeTasks').textContent = trainee.tasks;
+      document.getElementById('feedbackTraineeProgress').textContent = trainee.progress;
+      document.getElementById('feedbackText').value = trainee.feedback;
+
+      document.getElementById('feedbackModal').style.display = 'flex';
+    }
+
+    // Function to submit feedback
+    function submitFeedback() {
+      const feedbackText = document.getElementById('feedbackText').value;
+      const traineeIndex = trainees.findIndex(t => t.name === document.getElementById('feedbackTraineeName').textContent);
+      
+      if (traineeIndex > -1) {
+        trainees[traineeIndex].feedback = feedbackText;
+        alert('Feedback submitted successfully!');
+        closeFeedbackModal();
+      }
+    }
+
+    // Function to close the feedback modal
+    function closeFeedbackModal() {
+      document.getElementById('feedbackModal').style.display = 'none';
+    }
+
+    // Load trainees when the page is loaded
+    window.onload = loadTrainees;
+  </script>
+</body>
+</html>

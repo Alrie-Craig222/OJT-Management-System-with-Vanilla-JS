@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Communicate with Trainees and Agencies</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #ff4500;
+    }
+
+    .message-options {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 2em;
+    }
+
+    .message-button {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.7em 2em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      font-size: 1.1em;
+    }
+
+    .message-button:hover {
+      background-color: #e03e00;
+    }
+
+    .message-section {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 2em;
+    }
+
+    .message-list {
+      width: 80%;
+      margin: 2em auto;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    .message-list th, .message-list td {
+      padding: 12px;
+      border: 1px solid #ff4500;
+    }
+
+    .message-list th {
+      background-color: #ff4500;
+      color: white;
+    }
+
+    .message-list td {
+      background-color: #f2f2f2;
+    }
+
+    .message-form {
+      margin-top: 2em;
+    }
+
+    .message-input {
+      width: 80%;
+      padding: 1em;
+      margin: 1em auto;
+      border-radius: 5px;
+      border: 1px solid #ff4500;
+      font-size: 1em;
+    }
+
+    .send-message-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.7em 2em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      font-size: 1.1em;
+    }
+
+    .send-message-btn:hover {
+      background-color: #e03e00;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Communicate with Trainees and Agencies</h1>
+  </header>
+
+  <main>
+    <h2>Coordinator Messaging System</h2>
+
+    <div class="message-options">
+      <button class="message-button" onclick="showMessageSection('trainees')">Message Trainees</button>
+      <button class="message-button" onclick="showMessageSection('agency')">Message Training Agency</button>
+    </div>
+
+    <div id="messageSection" class="message-section hidden">
+      <h3 id="messageTitle"></h3>
+      
+      <table class="message-list" id="messageTable">
+        <thead>
+          <tr>
+            <th>Sender</th>
+            <th>Recipient</th>
+            <th>Date</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody id="messageBody"></tbody>
+      </table>
+
+      <div class="message-form">
+        <textarea id="messageInput" class="message-input" placeholder="Type your message here..."></textarea><br>
+        <button class="send-message-btn" onclick="sendMessage()">Send Message</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+
+  <script>
+    // Simulate data for messages
+    const messagesData = {
+      trainees: [
+        { sender: 'Coordinator', recipient: 'John Doe', date: '2024-11-21', message: 'Please submit your performance report by tomorrow.' },
+        { sender: 'Coordinator', recipient: 'Jane Smith', date: '2024-11-20', message: 'Reminder to attend the meeting tomorrow.' }
+      ],
+      agency: [
+        { sender: 'Coordinator', recipient: 'Training Agency', date: '2024-11-19', message: 'Please review the submitted documents.' },
+        { sender: 'Coordinator', recipient: 'Training Agency', date: '2024-11-18', message: 'Confirm if the trainees are scheduled for this week.' }
+      ]
+    };
+
+    // Show message section based on selected recipient
+    function showMessageSection(type) {
+      const messageSection = document.getElementById('messageSection');
+      const messageTitle = document.getElementById('messageTitle');
+      const messageBody = document.getElementById('messageBody');
+
+      // Set the title based on the selected recipient
+      if (type === 'trainees') {
+        messageTitle.textContent = 'Messages for Trainees';
+      } else {
+        messageTitle.textContent = 'Messages for Training Agency';
+      }
+
+      // Clear previous messages
+      messageBody.innerHTML = '';
+
+      // Populate the table with data
+      messagesData[type].forEach(message => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${message.sender}</td>
+          <td>${message.recipient}</td>
+          <td>${message.date}</td>
+          <td>${message.message}</td>
+        `;
+        messageBody.appendChild(row);
+      });
+
+      // Show the message section
+      messageSection.classList.remove('hidden');
+    }
+
+    // Send a new message
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput').value;
+      if (messageInput.trim() === '') {
+        alert('Please enter a message!');
+        return;
+      }
+
+      const messageType = document.getElementById('messageTitle').textContent.includes('Trainees') ? 'trainees' : 'agency';
+      const currentDate = new Date().toISOString().split('T')[0]; // Get today's date (YYYY-MM-DD)
+
+      // Simulate adding the new message
+      const newMessage = {
+        sender: 'Coordinator',
+        recipient: messageType === 'trainees' ? 'John Doe / Jane Smith' : 'Training Agency',
+        date: currentDate,
+        message: messageInput
+      };
+
+      messagesData[messageType].push(newMessage);
+
+      // Clear the message input field
+      document.getElementById('messageInput').value = '';
+
+      // Refresh the displayed messages
+      showMessageSection(messageType);
+    }
+  </script>
+</body>
+</html>

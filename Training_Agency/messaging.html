@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Agency - Communicate with Coordinator and Trainees</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: #ff4500; /* Red-orange */
+      color: white;
+      padding: 1em 0;
+      text-align: center;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 0.5em 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #ff4500;
+    }
+
+    .message-box {
+      width: 80%;
+      margin: 0 auto;
+      border: 1px solid #ff4500;
+      padding: 1em;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .message-box h3 {
+      margin: 0;
+      color: #ff4500;
+    }
+
+    .message-box textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      margin-top: 1em;
+    }
+
+    .send-btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.5em 1.5em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-top: 1em;
+    }
+
+    .send-btn:hover {
+      background-color: #e03e00;
+    }
+
+    .message-history {
+      margin-top: 3em;
+      width: 80%;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .message-history h4 {
+      color: #ff4500;
+    }
+
+    .message-history .message {
+      background-color: #f2f2f2;
+      padding: 0.5em;
+      margin-bottom: 1em;
+      border-left: 5px solid #ff4500;
+      border-radius: 5px;
+    }
+
+    .message-history .message p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Training Agency - Communicate with Coordinator and Trainees</h1>
+  </header>
+
+  <main>
+    <h2>Send a Message</h2>
+
+    <div class="message-box">
+      <h3>Send Message to Coordinator or Trainee</h3>
+      <label for="recipient">Recipient:</label>
+      <select id="recipient" class="recipient-select">
+        <option value="coordinator">Coordinator</option>
+        <option value="trainee">Trainee</option>
+      </select>
+
+      <textarea id="message" placeholder="Type your message here..."></textarea>
+      <button class="send-btn" onclick="sendMessage()">Send Message</button>
+    </div>
+
+    <div class="message-history" id="messageHistory">
+      <h4>Message History</h4>
+      <!-- Sent messages will be displayed here -->
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2024 OJT Management System</p>
+  </footer>
+
+  <script>
+    // Sample data for messages
+    const messages = [];
+
+    // Function to send a message
+    function sendMessage() {
+      const messageText = document.getElementById('message').value;
+      const recipient = document.getElementById('recipient').value;
+
+      if (!messageText.trim()) {
+        alert('Please enter a message.');
+        return;
+      }
+
+      const newMessage = {
+        recipient: recipient,
+        text: messageText,
+        timestamp: new Date().toLocaleString()
+      };
+
+      messages.push(newMessage);
+      document.getElementById('message').value = ''; // Clear message field
+      alert('Message sent successfully!');
+
+      displayMessages();
+    }
+
+    // Function to display the message history
+    function displayMessages() {
+      const historyContainer = document.getElementById('messageHistory');
+      historyContainer.innerHTML = '<h4>Message History</h4>'; // Reset message history
+
+      messages.forEach(message => {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.innerHTML = `
+          <p><strong>Recipient:</strong> ${message.recipient}</p>
+          <p><strong>Message:</strong> ${message.text}</p>
+          <p><strong>Sent on:</strong> ${message.timestamp}</p>
+        `;
+        historyContainer.appendChild(messageElement);
+      });
+    }
+  </script>
+</body>
+</html>
