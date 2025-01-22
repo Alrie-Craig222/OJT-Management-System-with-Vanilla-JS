@@ -37,25 +37,29 @@
                     <li class="active"><a href="index.html"><i class="fa fa-home text-warning"></i><span>
                                 Dashboard</span></a>
                     </li>
-                    <li><a href="coordinator.html"><i class="fa fa-user text-success"></i><span>
-                                Coordinator</span></a>
-                    </li>
                     <li><a href="student.html"><i class="fa fa-users text-success"></i><span> Students</span></a>
                     </li>
-                    <li><a href="module.html"><i class="fa fa-book text-success"></i><span> Enrollment Module</span></a>
+                    <li><a href="coordinator.html"><i class="fa fa-user text-success"></i><span>
+                                Coordinators</span></a>
                     </li>
                     <li><a href="organization.html"><i class="fa fa-building text-success"></i><span>
-                                Organization</span></a>
+                        Organizations</span></a>
                     </li>
+                    <li><a href="monitor_overall_progress.html"><i class="fa fa-envelope text-success"></i><span>
+                        Performance Reports</span></a>
+                     </li>
+                     <li><a href="monitor_overall_progress.html"><i class="fa fa-envelope text-success"></i><span>
+                        Document Submissions</span></a>
+                     </li>
+                     <li><a href="oversee_communication.html"><i class="fa fa-envelope text-success"></i><span>
+                        Chatbot</span></a>
+                     </li>
+                    <li><a href="module.html"><i class="fa fa-book text-success"></i><span> Enrollment Module</span></a>
+                    </li>
+                   
                     <li><a href="message.html"><i class="fa fa-envelope text-success"></i><span>
                                 Message</span></a>
                     </li>
-                    <li><a href="monitor_overall_progress.html"><i class="fa fa-envelope text-success"></i><span>
-                        monitor_overall_progress</span></a>
-            </li>
-                     <li><a href="oversee_communication.html"><i class="fa fa-envelope text-success"></i><span>
-                oversee_communication</span></a>
-    </li>
     <li><a href="view_reports.html"><i class="fa fa-envelope text-success"></i><span>
         view_reports</span></a>
 </li>
@@ -169,6 +173,50 @@
                     </div>
                 </div>
             </div>
+
+            <div class="section-body">
+                <div class="container-fluid">
+                    <div class="row clearfix">
+                        <!-- OJT Progress Statistics -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>OJT Progress Statistics</h3>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="ojtProgressChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- Notifications -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Notifications</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <i class="fa fa-file-alt text-warning"></i> Pending document approvals: <strong>3</strong>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa fa-comments text-success"></i> Chatbot feedback received: <strong>5</strong>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa fa-envelope text-info"></i> New messages from trainees: <strong>2</strong>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa fa-bell text-danger"></i> Overdue tasks: <strong>1</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
                         </div>
                     </div>
                 </div>
@@ -212,6 +260,36 @@
             });
 
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+    // OJT Progress Statistics Chart
+    var ojtProgressData = {
+        labels: ['Completed', 'Ongoing', 'Pending'],
+        datasets: [
+            {
+                label: 'OJT Progress',
+                data: [40, 25, 10],
+                backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
+                hoverBackgroundColor: ['#218838', '#e0a800', '#c82333']
+            }
+        ]
+    };
+
+    var ctxProgress = document.getElementById('ojtProgressChart').getContext('2d');
+    new Chart(ctxProgress, {
+        type: 'doughnut',
+        data: ojtProgressData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+});
+
     </script>
 </body>
 
