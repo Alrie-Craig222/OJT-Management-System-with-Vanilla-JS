@@ -36,7 +36,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
       // Redirect based on role
       if (userRole === 'admin') {
-         window.location.href = 'admin/index.html';
+         window.location.href = 'admin/dashboard.html';
       } else if (userRole === 'coordinator') {
          window.location.href = 'coordinator/index.html';
       } else if (userRole === 'student') {

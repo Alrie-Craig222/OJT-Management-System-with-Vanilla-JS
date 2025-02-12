@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <title>Student Dashboard - OJT Records Monitoring System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ff4500; /* Red-orange */
+        }
+
+        .navbar a {
+            color: #fff;
+        }
+
+        .navbar a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 240px;
+            background-color: #2c2c2c; /* Black */
+            padding-top: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+
+        .sidebar a {
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #ff4500; /* Red-orange */
+        }
+
+        .main-content {
+            margin-left: 240px;
+            padding: 20px;
+        }
+
+        .card-header {
+            background-color: #ff4500; /* Red-orange */
+            color: white;
+            font-size: 18px;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .card {
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .status.completed {
+            color: green;
+        }
+
+        .status.pending {
+            color: orange;
+        }
+
+        .status.in-progress {
+            color: blue;
+        }
+
+        .footer {
+            background-color: #2c2c2c; /* Black */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .btn-danger {
+            background-color: #ff4500; /* Red-orange */
+        }
+
+        .btn-danger:hover {
+            background-color: black; /* Darker red-orange */
+        }
+
+        .text-orange {
+            color: #ff4500; /* Red-orange */
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3 class="text-center text-white">OJT Dashboard</h3>
+        <a href="student_dashboard.html"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+        <a href="attendance.html"><i class="fa fa-calendar-check"></i> Attendance</a>
+        <a href="performance.html"><i class="fa fa-chart-line"></i> Performance</a>
+        <a href="documents.html"><i class="fa fa-file-alt"></i> Documents</a>
+        <a href="feedback.html"><i class="fa fa-comment"></i> Feedback</a>
+        <a href="logout.html"><i class="fa fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Student Dashboard</a>
+                <div class="d-flex">
+                    <span class="navbar-text text-white">Welcome, [Student Name]</span>
+                </div>
+            </div>
+        </nav>
+
+        
+            <!-- Main Content -->
+            <div class="col-md-10 main-content">
+                <h2 class="mt-4">Trainee Feedback Form</h2>
+                <form id="feedbackForm">
+                    <h4>Experience</h4>
+                    <div class="form-group">
+                        <label>1. My training is aligned with my field of specialization</label>
+                        <div class="rating">
+                            <input type="radio" name="q1" value="1"> 1
+                            <input type="radio" name="q1" value="2"> 2
+                            <input type="radio" name="q1" value="3"> 3
+                            <input type="radio" name="q1" value="4"> 4
+                            <input type="radio" name="q1" value="5"> 5
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>2. My training is challenging</label>
+                        <div class="rating">
+                            <input type="radio" name="q2" value="1"> 1
+                            <input type="radio" name="q2" value="2"> 2
+                            <input type="radio" name="q2" value="3"> 3
+                            <input type="radio" name="q2" value="4"> 4
+                            <input type="radio" name="q2" value="5"> 5
+                        </div>
+                    </div>
+
+                    <h4>Problems Met</h4>
+                    <textarea class="form-control" maxlength="1000" placeholder="Write any comments here..."></textarea>
+
+                    <h4>Other Concerns</h4>
+                    <textarea class="form-control" maxlength="1000" placeholder="Write any other concerns here..."></textarea>
+
+                    <button type="submit" class="btn btn-primary mt-3">Submit Evaluation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2024 OJT Records Monitoring System. All Rights Reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/feedback.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Sidebar - Reduced Width */
+.sidebar {
+    position: fixed;
+    top: 70px; /* Adjusted for navbar */
+    left: 0;
+    width: 70px;
+    height: calc(100vh - 70px);
+    background-color: #686666;
+    color: #fff;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav .nav-item {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav .nav-link {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    transition: 0.3s;
+    font-size: 14px; /* Adjusted for smaller sidebar */
+}
+
+.sidebar-nav .nav-link i {
+    margin-right: 8px;
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: #ff5722;
+    transform: translateX(5px);
+}
+
+/* Main Content - Adjusted for Sidebar */
+.main-content {
+    margin-left: 350px; /* Adjusted for new sidebar width */
+    padding: 80px 30px 30px;
+    width: calc(100% - 220px);
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background: #ddd;
+    font-size: 15px;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.tab-button.active {
+    background: #007bff;
+    color: white;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #007bff;
+    color: white;
+}
+
+/* Buttons */
+.actions button {
+    margin: 5px;
+    padding: 7px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 180px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 160px;
+    }
+
+    .main-content {
+        margin-left: 170px;
+        width: calc(100% - 170px);
+        padding: 20px;
+    }
+
+    .tab-button {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}

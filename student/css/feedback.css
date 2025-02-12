@@ -1,0 +1,33 @@
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: #686666;
+    color: #fff;
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    overflow-y: auto;
+    padding-top: 20px;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    color: white;
+}
+
+/* Rating */
+.rating input {
+    margin-right: 10px;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 15px;
+}
